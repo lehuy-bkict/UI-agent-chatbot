@@ -1,7 +1,7 @@
 {
-  "name": "chatbot-react",
+  "name": "agent-chat-ui",
   "version": "1.0.0",
-  "description": "Chatbot React Application",
+  "description": "React-based chat interface for AI agent integration",
   "private": true,
   "dependencies": {
     "langchain": "^1.5.3",

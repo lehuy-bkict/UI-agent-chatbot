@@ -1,14 +1,14 @@
-# Agent Builder Guide Chatbot
+# Agent Chat UI
 
-Demo chatbot connecting to **Agent Builder**, serving as a guide for integrating a project with Agent.
+A React-based conversational interface for connecting a frontend app to an AI agent API and displaying chat responses.
 
 ## Purpose
 
-This system is built to:
+This project is built to:
 
-- Guide how to connect a React app to the Agent API
-- Demo the message send/receive flow with an Agent
-- Serve as reference documentation for integrating Agent into other projects
+- Demonstrate how to connect a React app to an Agent API
+- Show the message send/receive flow in a chat-based UI
+- Serve as a reference implementation for integrating an Agent into other projects
 
 ## Features
 
@@ -55,14 +55,13 @@ const API_URL = "your-agent-api-here";
 | Variable | Description |
 |------|-------|
 | `API_KEY` | API authentication key (`x-api-key` header) |
-| `AGENT_ID` | The ID of the Agent created in Agent Builder |
-| `API_URL` | API endpoint, automatically includes `AGENT_ID` in the URL |
+| `API_URL` | API endpoint URL, automatically includes the URL agent|
 
 # API Reference
 
 ### `sendMessageToAgent(message)`
 
-Send a message to the Agent Builder API and receive a response.
+Send a message to the AI Agent API and receive a response.
 
 **Parameters:**
 | Name | Type | Description |
@@ -84,3 +83,11 @@ Send a message to the Agent Builder API and receive a response.
   "input_value": "Message content"
 }
 ```
+
+# Demo
+
+## Chat UI Preview
+![alt text](agent-chat-ui-preview.png)
+
+## Chat UI Expanded
+![alt text](agent-chat-ui-expanded.png)
