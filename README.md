@@ -1,86 +1,86 @@
 # Agent Builder Guide Chatbot
 
-Demo chatbot kết nối tới **Agent Builder**, phục vụ hướng dẫn cách tích hợp dự án với Agent Builder.
+Demo chatbot connecting to **Agent Builder**, serving as a guide for integrating a project with Agent.
 
-## Mục đích
+## Purpose
 
-Hệ thống này được xây dựng để:
+This system is built to:
 
-- Hướng dẫn cách kết nối ứng dụng React tới API của Agent Builder
-- Demo luồng gửi tin nhắn và nhận phản hồi từ Agent
-- Làm tài liệu tham khảo cho việc tích hợp Agent Builder vào các dự án khác
+- Guide how to connect a React app to the Agent API
+- Demo the message send/receive flow with an Agent
+- Serve as reference documentation for integrating Agent into other projects
 
-## Tính năng
+## Features
 
-- **Chat Popup** — Widget chat góc phải màn hình, mở/đóng mượt mà
-- **Expand Mode** — Mở rộng chat thành modal hỗ trợ kéo thả và resize
-- **Markdown Rendering** — Phản hồi của bot hiển thị đầy đủ Markdown (GFM: bảng, danh sách, code block...)
-- **Thinking Indicator** — Hiệu ứng "đang suy nghĩ" khi chờ phản hồi
-- **Emoji Picker** — Chèn emoji vào tin nhắn
-- **Xóa lịch sử** — Reset cuộc trò chuyện về trạng thái ban đầu
+- **Chat Popup** — Chat widget at the bottom-right corner, smooth open/close
+- **Expand Mode** — Expand chat into a draggable, resizable modal
+- **Markdown Rendering** — Bot responses render full Markdown (GFM: tables, lists, code blocks...)
+- **Thinking Indicator** — "Thinking" animation while waiting for a response
+- **Emoji Picker** — Insert emojis into messages
+- **Clear History** — Reset the conversation to its initial state
 
-## Cấu trúc dự án
-
+## Project Structure
+```
 demo_chatbot/
 ├── public/
-│   └── index.html              # HTML gốc, load emoji-mart từ CDN
+│   └── index.html              # Base HTML, loads emoji-mart from CDN
 ├── src/
-│   ├── agentConfig.js          # Cấu hình Agent (API Key, URL) & API Service
-│   ├── sharedComponents.js     # UI Components dùng chung (Message, EmojiPicker, BotAvatar, ThinkingIndicator)
-│   ├── App.js                  # Component chính — Chat Popup (widget góc phải)
-│   ├── expand.js               # Component Expand Chat (modal kéo thả, resize)
-│   ├── App.css                 # Stylesheet chung
-│   └── index.js                # Entry point React
+│   ├── agentConfig.js          # Agent configuration (API Key, URL) & API service
+│   ├── sharedComponents.js     # Shared UI components (Message, EmojiPicker, BotAvatar, ThinkingIndicator)
+│   ├── App.js                  # Main component — Chat Popup (bottom-right widget)
+│   ├── expand.js               # Expand Chat component (draggable/resizable modal)
+│   ├── App.css                 # Shared stylesheet
+│   └── index.js                # React entry point
 ├── package.json
 └── README.md
+```
+# Installation & Run
 
-## Cài đặt & Chạy
-
-# Cài đặt dependencies
+## Install dependencies
 npm install
 
-# Chạy development server
+## Start development server
 npm start
 
-# Build production
+## Build production
 npm run build
 
-## Cấu hình Agent
+# Agent Configuration
 
-Mở file `src/agentConfig.js` và cập nhật các giá trị sau:
+Open `src/agentConfig.js` and update the following values:
 
 const API_KEY = "your-api-key-here";
-const AGENT_ID = "your-agent-id-here";
-const API_URL = `https://agent.sec.samsung.net/api/v1/run/${AGENT_ID}?stream=false`;
+const API_URL = "your-agent-api-here";
 
-| Biến | Mô tả |
+| Variable | Description |
 |------|-------|
-| `API_KEY` | Khóa xác thực API (x-api-key header) |
-| `AGENT_ID` | ID của Agent đã tạo trên Agent Builder |
-| `API_URL` | Endpoint API, tự động ghép `AGENT_ID` vào URL |
+| `API_KEY` | API authentication key (`x-api-key` header) |
+| `AGENT_ID` | The ID of the Agent created in Agent Builder |
+| `API_URL` | API endpoint, automatically includes `AGENT_ID` in the URL |
 
-## API Reference
+# API Reference
 
 ### `sendMessageToAgent(message)`
 
-Gửi tin nhắn tới Agent Builder API và nhận phản hồi.
+Send a message to the Agent Builder API and receive a response.
 
 **Parameters:**
-| Tên | Type | Mô tả |
+| Name | Type | Description |
 |-----|------|-------|
-| `message` | `string` | Nội dung tin nhắn của người dùng |
+| `message` | `string` | The user's message content |
 
 **Returns:** `Promise<{ text: string, hasError: boolean }>`
 
-| Field | Type | Mô tả |
+| Field | Type | Description |
 |-------|------|-------|
-| `text` | `string` | Nội dung phản hồi từ Agent (hoặc JSON raw nếu không parse được) |
-| `hasError` | `boolean` | `true` nếu Agent trả về lỗi |
+| `text` | `string` | The Agent's response text (or raw JSON if parsing fails) |
+| `hasError` | `boolean` | `true` if the Agent returned an error |
 
 **Request format:**
 ```json
 {
   "input_type": "chat",
   "output_type": "chat",
-  "input_value": "Nội dung tin nhắn"
+  "input_value": "Message content"
 }
+```
